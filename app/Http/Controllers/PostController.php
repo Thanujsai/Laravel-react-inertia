@@ -11,15 +11,15 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index()//endpoint is /posts but in web.php we have excluded this method from the resource route and used in in "/" endpoint
     {
-        //
+        return inertia('Home');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create()//endpoint is /posts/create
     {
         //
     }
