@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     sleep(2);
@@ -13,3 +14,4 @@ Route::get('/about', function () {
 });
 
 // Route::inertia("/",'Home');//this is same as line 5-7
+Route::resource('post', PostController::class);
