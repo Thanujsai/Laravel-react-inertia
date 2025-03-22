@@ -13,7 +13,7 @@ class PostController extends Controller
      */
     public function index()//endpoint is /posts but in web.php we have excluded this method from the resource route and used in in "/" endpoint
     {
-        $posts = Post::latest()->get();//fetch all the posts from the Post table
+        $posts = Post::latest()->paginate(5);//fetch all the posts from the Post table, paginate them, 5 per page
         return inertia('Home', ['posts' => $posts]);//sending a prop named posts to the Home component
     }
 

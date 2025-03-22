@@ -28,7 +28,7 @@ function Home({posts}) {
         }}
       className='text-3xl pt-16 flex place-items-center justify-center text-red-400 font-extralight'>Hello Thanuj</motion.h1>
       <div>
-        {posts.map(post => (
+        {posts.data.map(post => (
           <div key={post.id} className='p-4 border-b'>
             <motion.div
               initial={{ x: -100, opacity: 0 }}
@@ -56,6 +56,26 @@ function Home({posts}) {
             className='pt-[5px] font-medium'>{post.id} . {post.body}</motion.p>
           </div>
           ))}
+      </div>
+
+      <div className='py-12 px-4'>
+        {posts.links.map((link) => (
+          console.log("link"),
+          console.log(link),
+          link.url ? //{url: null, label: '&laquo; Previous', active: false} => url is null for "Previous" when current page is first page and url is null for "Next" when current page is last page, therefore they will be disabled
+          <Link 
+            href={link.url} 
+            key={link.label} 
+            dangerouslySetInnerHTML={{ __html : link.label}} 
+            className={`p-1 mx-1 ${ link.active?"text-blue-500 font-bold":""}`}/>
+          : 
+          <span
+            key={link.label} 
+            dangerouslySetInnerHTML={{ __html : link.label}} 
+            className="p-1 mx-1 text-slate-300">
+            
+          </span>
+        ))}
       </div>
       <Link preserveScroll href="/" className='block title mt-[1000px]'>{/* By using link tag and preserveScroll attribute we can prevent the page from reloading */}
         {new Date().toLocaleTimeString()}
