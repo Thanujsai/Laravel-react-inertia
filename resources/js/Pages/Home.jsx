@@ -2,8 +2,9 @@ import React from 'react';
 import { delay, motion } from 'framer-motion';
 import Layout from '../Layouts/Layout';
 import { Link } from '@inertiajs/react';
-function Home(props) {
-    console.log(props.name)
+function Home({posts}) {
+    // console.log(props.name)
+    console.log(posts)
   return (
     <div>
       <motion.h1 
@@ -25,7 +26,14 @@ function Home(props) {
             damping:10,
             delay:2
         }}
-      className='text-3xl pt-16 flex place-items-center justify-center text-red-400 font-extralight'>Hello {props.name}</motion.h1>
+      className='text-3xl pt-16 flex place-items-center justify-center text-red-400 font-extralight'>Hello Thanuj</motion.h1>
+      <div>
+        {posts.map(post => (
+          <div key={post.id}>
+            <p className='pt-[5px]'>{post.id} . {post.body}</p>
+          </div>
+          ))}
+      </div>
       <Link preserveScroll href="/" className='block title mt-[1000px]'>{/* By using link tag and preserveScroll attribute we can prevent the page from reloading */}
         {new Date().toLocaleTimeString()}
       </Link>
