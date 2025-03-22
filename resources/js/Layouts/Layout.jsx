@@ -7,7 +7,7 @@ function Layout({ children }) {
       <header className="bg-black text-white p-4 shadow-md">
         <nav className="flex justify-center space-x-6">
           <Link className="nav-link text-lg font-semibold hover:text-yellow-200 transition" href="/">Home</Link>{/* if we use a tag it reload the entire page whenever clicked, whereas link tag only reloads the component */}
-          <Link className="nav-link text-lg font-semibold hover:text-yellow-200 transition" href="/about">About</Link>
+          <Link className="nav-link text-lg font-semibold hover:text-yellow-200 transition" href="/posts/create">Create</Link>
         </nav>
       </header>
 
