@@ -29,8 +29,31 @@ function Home({posts}) {
       className='text-3xl pt-16 flex place-items-center justify-center text-red-400 font-extralight'>Hello Thanuj</motion.h1>
       <div>
         {posts.map(post => (
-          <div key={post.id}>
-            <p className='pt-[5px]'>{post.id} . {post.body}</p>
+          <div key={post.id} className='p-4 border-b'>
+            <motion.div
+              initial={{ x: -100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{
+                type: "spring",
+                stiffness: 100,
+                damping: 10,
+                delay: 2
+              }}
+              className='text-sm text-slate-600'
+            >
+              <span>Posted On : </span>
+              <span>{new Date(post.created_at).toLocaleTimeString()}</span>
+            </motion.div>
+            <motion.p 
+              initial={{ x: -100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{
+                type: "spring",
+                stiffness: 100,
+                damping: 10,
+                delay: 1
+              }}
+            className='pt-[5px] font-medium'>{post.id} . {post.body}</motion.p>
           </div>
           ))}
       </div>

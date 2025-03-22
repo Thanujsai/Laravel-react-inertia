@@ -16,6 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        Post::factory(30) -> create();//call factory method present in Post model, 30 is number of instances
+        Post::factory(2) -> create();//call factory method present in Post model, 30 is number of instances
     }
 }
