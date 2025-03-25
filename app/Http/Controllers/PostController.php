@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -27,8 +28,10 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request)//endpoint is /posts, this method is called when a post request is made to /posts
     {
+        Log::info("Inside store method");//logs in laravel.log file present in storage/logs/laravel.log
+        Log::info($request->all()); // Logs all request data
         $fields = $request->validate([//saving the reuest data in fields
             'body' => ['required']//body field is required
         ]);
@@ -40,9 +43,9 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show(Post $post)//rendering a page to each specific post/resource, endpoint is /posts/{id}
     {
-        //
+        return inertia('Show', ['post' => $post]);//sending a prop named post to the Show component
     }
 
     /**

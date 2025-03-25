@@ -54,6 +54,8 @@ function Home({posts}) {
                 delay: 1
               }}
             className='pt-[5px] font-medium'>{post.id} . {post.body}</motion.p>
+
+            <Link href = {`/posts/${post.id}`} className="text-blue-600 font-bold">Read more...</Link>{/*navigates to Show component with post id as parameter via post controllers show method*/}
           </div>
           ))}
       </div>
