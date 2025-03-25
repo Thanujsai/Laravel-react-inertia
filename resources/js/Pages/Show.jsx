@@ -3,6 +3,8 @@ import {Button} from 'antd';
 import { Inertia } from '@inertiajs/inertia';
 import { motion } from 'framer-motion';
 import { useForm } from '@inertiajs/react';
+import {useRoute} from '../../../vendor/tightenco/ziggy';//useRoute hook is present in ziggy package
+
 
 function Show(props) {
     console.log(props);
@@ -10,11 +12,15 @@ function Show(props) {
     console.log(useForm());
 
     const {delete: destroy} = useForm();//extracting delete method from useForm hook
+    const route = useRoute();
 
     function submit(e) {
         e.preventDefault();
-        destroy(`/posts/${props.post.id}`);//invokes destroy method in PostsController since destroy /posts/{id} > invokes posts.destroy › PostController@destroy
+        // destroy(`/posts/${props.post.id}`);//invokes destroy method in PostsController since destroy /posts/{id} > invokes posts.destroy › PostController@destroy
         //  DELETE          posts/{post} .................. posts.destroy › PostController@destroy
+
+        //instead of above approach
+        destroy(route('posts.destroy', props.post.id));
     }//destroy makes a http delete request to the server
     const goBack =() => {
         Inertia.visit("/");
