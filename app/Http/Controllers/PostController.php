@@ -69,6 +69,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        //dd($post);//shows the post data in json format
+        $post->delete();//deletes the post from the database
+
+        return redirect("/");//redirects to the home page
     }
 }
