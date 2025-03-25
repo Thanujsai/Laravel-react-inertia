@@ -6,6 +6,7 @@
     @viteReactRefresh
     @vite('resources/js/app.jsx')
     @inertiaHead
+    @routes<!-- This is required for react routes to work -->
 </head>
 <body>
     @inertia

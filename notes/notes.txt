@@ -1,3 +1,7 @@
 Running php artisan migrate only creates or modifies database tables based on your migration files. It does not insert data into the Post table.
 
 To insert fake data using your PostFactory, you need to run database seeders separately.(php artisan db:seed)
+
+below methods are in postController
+public function store(Request $request)//endpoint is /posts, this method is called when a post request is made to /posts
+    public function show(Post $post)//rendering a page to each specific post/resource, endpoint is /posts/{id}

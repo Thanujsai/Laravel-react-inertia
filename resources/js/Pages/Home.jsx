@@ -2,9 +2,12 @@ import React from 'react';
 import { delay, motion } from 'framer-motion';
 import Layout from '../Layouts/Layout';
 import { Link } from '@inertiajs/react';
+import {useRoute} from '../../../vendor/tightenco/ziggy';//useRoute hook is present in ziggy package
 function Home({posts}) {
     // console.log(props.name)
     console.log(posts)
+
+    const route = useRoute();
   return (
     <div>
       <motion.h1 
@@ -55,7 +58,10 @@ function Home({posts}) {
               }}
             className='pt-[5px] font-medium'>{post.id} . {post.body}</motion.p>
 
-            <Link href = {`/posts/${post.id}`} className="text-blue-600 font-bold">Read more...</Link>{/*navigates to Show component with post id as parameter via post controllers show method*/}
+            {/* <Link href = {`/posts/${post.id}`} className="text-blue-600 font-bold">Read more...</Link>navigates to Show component with post id as parameter via post controllers show method */}
+            <Link href = {route('posts.show', post)}
+             className="text-blue-600 font-bold">Read more...</Link>{/*navigates to Show component with post id as parameter via post controllers show method*/}
+
           </div>
           ))}
       </div>
