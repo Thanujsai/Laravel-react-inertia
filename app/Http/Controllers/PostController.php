@@ -72,6 +72,9 @@ class PostController extends Controller
         //dd($post);//shows the post data in json format
         $post->delete();//deletes the post from the database
 
-        return redirect("/");//redirects to the home page
+        return redirect("/") -> with(
+            'message',//this should be the same name as mentioned in the HandleInertiaRequests middleware share method
+            'Post Deleted Successfully!'
+        );//redirects to the home page
     }
 }
