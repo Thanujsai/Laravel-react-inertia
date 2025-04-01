@@ -45,6 +45,17 @@ function Home({posts}) {//getting this prop posts from index method of postcontr
         >
           {flashMsg}
         </motion.div>
+        )} 
+
+      {flash.success && (
+        <motion.div
+          initial={{ opacity: 1, x: 0 }}
+          animate={{ opacity: 0, x: 100 }}
+          transition={{ duration: 1, delay: 3 }}
+          className="absolute top-24 right-6 bg-green-500 p-2 rounded-md shadow-lg text-sm text-white"
+        >
+          {flash.success}
+        </motion.div>
         )}    
 
         <motion.h1 

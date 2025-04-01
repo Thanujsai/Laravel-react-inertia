@@ -53,7 +53,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return inertia("Edit", ['post' => $post]);//sending a prop named post to the Edit component, we get it from edit page
     }
 
     /**
@@ -61,7 +61,17 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        sleep(1);
+        
+        $fields = $request->validate([//saving the reuest data in fields
+            'body' => ['required']//body field is required
+        ]);
+
+        $post->update($fields);//updates the post in the database posts table, but where is this update method defined? It is defined in the Post model. The Post model extends the Eloquent Model class, which has a update method that updates a record in the database.
+        return redirect('/')-> with(
+            'success',//this should be the same name as mentioned in the HandleInertiaRequests middleware share method
+            'Post Updated Successfully!'
+        );//redirects to the home page;
     }
 
     /**

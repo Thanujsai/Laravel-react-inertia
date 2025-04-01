@@ -2,7 +2,7 @@ import React from 'react';
 import {Button} from 'antd';
 import { Inertia } from '@inertiajs/inertia';
 import { motion } from 'framer-motion';
-import { useForm } from '@inertiajs/react';
+import { useForm, Link } from '@inertiajs/react';
 import {useRoute} from '../../../vendor/tightenco/ziggy';//useRoute hook is present in ziggy package
 
 
@@ -54,11 +54,15 @@ function Show(props) {
               }}
             className='pt-[5px] font-medium'>{post.id} . {post.body}</motion.p>
 
-            <p className='flex items-center justify-end gap-2'>
+            <div className='flex items-center justify-end gap-2 py-2'>
                 <form onSubmit={submit}>
                     <button className='bg-red-500 rounded-md text-sm px-4 py-1 text-white'>Delete</button>
                 </form>
-            </p>
+                {/* <Link href={`/posts/${post.id}/edit`} className='bg-green-500 rounded-md text-sm px-4 py-1 text-white'>Update</Link> */}
+
+                <Link href={route('posts.edit', post)} className='bg-green-500 rounded-md text-sm px-4 py-1 text-white'>Update</Link>{/* using route */}
+
+            </div>
         </div>
       <Button onClick={goBack}>Back</Button>
     </div>
