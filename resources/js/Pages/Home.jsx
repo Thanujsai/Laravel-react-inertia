@@ -1,26 +1,51 @@
 import React from 'react';
 import { delay, motion } from 'framer-motion';
 import Layout from '../Layouts/Layout';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import {useRoute} from '../../../vendor/tightenco/ziggy';//useRoute hook is present in ziggy package
+import { useState, useEffect } from 'react';
 function Home({posts}) {
     // console.log(props.name)
-    console.log(posts)
+    console.log(posts);
+    console.log("use page");
+    console.log(usePage());
 
     const route = useRoute();
+    const { flash } = usePage().props;//usePage().props is used to access the props passed from controller to the page, since flash is in usepage -> props -> flash
+    const [flashMsg, setFlashMsg] = useState(flash.message);
+
+    useEffect(() => {
+      const timer = setTimeout(() => {
+          setFlashMsg(null);
+      }, 6000); // 6 seconds delay
+      return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div>
       <motion.h1 
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{
-          type: "spring",
+          type: "spring", 
           stiffness: 100,
           damping: 10,
           delay: 1 
         }}
       className="text-9xl text-blue-400">Home</motion.h1>
-    <motion.h1 
+
+      {flashMsg && (
+        <motion.div
+          initial={{ opacity: 1, x: 0 }}
+          animate={{ opacity: 0, x: 100 }}
+          transition={{ duration: 1, delay: 3 }}
+          className="absolute top-24 right-6 bg-rose-500 p-2 rounded-md shadow-lg text-sm text-white"
+        >
+          {flashMsg}
+        </motion.div>
+        )}    
+
+        <motion.h1 
         initial={{opacity:0, scale:0 }}
         animate={{opacity:1, scale:1}}
         transition={{
@@ -68,8 +93,8 @@ function Home({posts}) {
 
       <div className='py-12 px-4'>
         {posts.links.map((link) => (
-          console.log("link"),
-          console.log(link),
+          // console.log("link"),
+          // console.log(link),
           link.url ? //{url: null, label: '&laquo; Previous', active: false} => url is null for "Previous" when current page is first page and url is null for "Next" when current page is last page, therefore they will be disabled
           <Link 
             href={link.url} 
