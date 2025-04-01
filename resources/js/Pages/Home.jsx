@@ -1,10 +1,10 @@
 import React from 'react';
 import { delay, motion } from 'framer-motion';
 import Layout from '../Layouts/Layout';
-import { Link, usePage } from '@inertiajs/react';
+import { Link, usePage, Head } from '@inertiajs/react';
 import {useRoute} from '../../../vendor/tightenco/ziggy';//useRoute hook is present in ziggy package
 import { useState, useEffect } from 'react';
-function Home({posts}) {
+function Home({posts}) {//getting this prop posts from index method of postcontroller
     // console.log(props.name)
     console.log(posts);
     console.log("use page");
@@ -13,6 +13,7 @@ function Home({posts}) {
     const route = useRoute();
     const { flash } = usePage().props;//usePage().props is used to access the props passed from controller to the page, since flash is in usepage -> props -> flash
     const [flashMsg, setFlashMsg] = useState(flash.message);
+    const {component} = usePage();
 
     useEffect(() => {
       const timer = setTimeout(() => {
@@ -23,6 +24,7 @@ function Home({posts}) {
 
   return (
     <div>
+      <Head title={component}/>{/*this title will be displayed in the browser tab */}
       <motion.h1 
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
