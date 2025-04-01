@@ -3,7 +3,7 @@ import { delay, motion } from 'framer-motion';
 import Layout from '../Layouts/Layout';
 import { Link, usePage } from '@inertiajs/react';
 import {useRoute} from '../../../vendor/tightenco/ziggy';//useRoute hook is present in ziggy package
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 function Home({posts}) {
     // console.log(props.name)
     console.log(posts);
@@ -14,10 +14,12 @@ function Home({posts}) {
     const { flash } = usePage().props;//usePage().props is used to access the props passed from controller to the page, since flash is in usepage -> props -> flash
     const [flashMsg, setFlashMsg] = useState(flash.message);
 
-    setTimeout(() => {
-      setFlashMsg(null);//clear flash message after 3 seconds
-    }
-    , 3000);
+    useEffect(() => {
+      const timer = setTimeout(() => {
+          setFlashMsg(null);
+      }, 6000); // 6 seconds delay
+      return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div>
@@ -25,14 +27,25 @@ function Home({posts}) {
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{
-          type: "spring",
+          type: "spring", 
           stiffness: 100,
           damping: 10,
           delay: 1 
         }}
       className="text-9xl text-blue-400">Home</motion.h1>
-      {flashMsg && <div className="absolute top-24 right-6 bg-rose-500 p-2 rounded-md shadow-lg text-sm text-white">{flashMsg}</div>}
-    <motion.h1 
+
+      {flashMsg && (
+        <motion.div
+          initial={{ opacity: 1, x: 0 }}
+          animate={{ opacity: 0, x: 100 }}
+          transition={{ duration: 1, delay: 3 }}
+          className="absolute top-24 right-6 bg-rose-500 p-2 rounded-md shadow-lg text-sm text-white"
+        >
+          {flashMsg}
+        </motion.div>
+        )}    
+
+        <motion.h1 
         initial={{opacity:0, scale:0 }}
         animate={{opacity:1, scale:1}}
         transition={{
