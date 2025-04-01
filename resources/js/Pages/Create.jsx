@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button} from 'antd';
-import { useForm } from '@inertiajs/react';
+import { useForm, Head } from '@inertiajs/react';
 
 function Create() {
 
@@ -18,6 +18,7 @@ function Create() {
 
     return (
     <>
+    <Head title="Create" />
     <div className="justify-items-center">
       <h1 className="flex text-amber-700 text-3xl">Create a new Post</h1>
     </div>
