@@ -10,6 +10,7 @@ createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
     let page = pages[`./Pages/${name}.jsx`]
+    //this below line in app.jsx is responsible for setting the default layout (which includes the navbar) across the entire application:
     page.default.layout = page.default.layout || ((page) => <Layout children={page} />);//if the page has default layout use that one, otherwise use our layout
     return page;
   },
